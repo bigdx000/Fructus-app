@@ -10,6 +10,8 @@ import SwiftUI
 struct FruitCardView: View {
     // Mark: - Properties
     
+    var fruit: Fruit
+    
     @State private var isAnimating: Bool = false
     
     // Mark: - Body
@@ -17,24 +19,24 @@ struct FruitCardView: View {
         ZStack {
             VStack(spacing: 20) {
                 // Fruit: Image
-                Image("blueberry")
+                Image(fruit.image)
                     .resizable()
                     .scaledToFit()
-                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 1.75), radius: 8, x: 6, y: 8)
+                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.55), radius: 8, x: 6, y: 8)
                     .scaleEffect(isAnimating ? 1.0 : 0.6)
                 //Fruit: Title
-                Text("Blueberry")
+                Text(fruit.title)
                     .foregroundColor(Color.white)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 1.75), radius: 3, x: 2, y: 3)
                 //Fruit: Headline
-                Text("Blueberries are sweet, nutritious and widley popular all over the world.")
+                Text(fruit.headline)
                     .foregroundColor(Color.white)
                     .font(.title2)
                     .fontWeight(.heavy)
                     .multilineTextAlignment(.center)
-                    .shadow(color: Color(red: 0, green: 0, blue:0, opacity: 0.95), radius: 3, x: 2, y: 3)
+                    .shadow(color: Color(red: 0, green: 0, blue:0, opacity: 0.55), radius: 3, x: 2, y: 3)
                     .padding(.horizontal, 16)
                     .frame(maxWidth: 480)
                 //Button: Start
@@ -48,7 +50,7 @@ struct FruitCardView: View {
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-        .background(LinearGradient(gradient: Gradient(colors: [Color("ColorBlueberryLight"), Color("ColorBlueberryDark")]), startPoint: .top, endPoint: .bottom))
+        .background(LinearGradient(gradient: Gradient(colors: fruit.gradientColors), startPoint: .top, endPoint: .bottom))
         .cornerRadius(20)
         .padding(.horizontal, 20)
     }
@@ -58,7 +60,7 @@ struct FruitCardView: View {
 
 struct FruitCardView_Previews: PreviewProvider {
     static var previews: some View {
-        FruitCardView()
+        FruitCardView(fruit: fruitsData[1])
             .previewDevice("iPhone 11")
             .previewLayout(.fixed(width: 460, height: 920))
             
